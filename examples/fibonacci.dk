@@ -1,0 +1,16 @@
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Lad B være et heltal.
+    Lad C være et heltal.
+    
+    Gem 1 i A.
+    Gem 1 i B.
+    Imens A er mindre end 1000.
+    Goddag.
+        Print A.
+        Gem A i C.
+        Læg A sammen med B, og gem det i A.
+        Gem C i B.
+    Farvel.
+Farvel.

@@ -1,0 +1,15 @@
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Ekko og inkrementer 1.
+    
+    Bemærk: Delsætning 1 er sin egen subexpr.
+    Bemærk: Delsætning 3 refererer til delsætning 2 med "det", 
+    Bemærk: og delsætning 2 bliver derfor et argument til delsætning 3.
+    Ekko og inkrementer 10, og ekko og inkrementer 20, og print det.
+Farvel.
+
+Offentlig Funktion Ekko og inkrementer (A som heltal) tilbagegiver heltal.
+Goddag.
+    Print A.
+    Tilbagegiv Læg A sammen med 1.
+Farvel.

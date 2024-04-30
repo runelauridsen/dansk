@@ -1,0 +1,478 @@
+════════════════════════════════════════════════════════════════
+print immediate
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Print 10.
+Farvel.
+────────────────────────────────────────────────────────────────
+10
+────────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+print expression
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Læg 10 sammen med 9, og print det.
+Farvel.
+────────────────────────────────────────────────────────────────
+19
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+print user proc return value
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    print (anden).
+Farvel.
+
+Offentlig Funktion Anden tilbagegiver heltal.
+Goddag.
+    Tilbagegiv 89.
+Farvel.
+────────────────────────────────────────────────────────────────
+89
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+stack cleanup
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Læg 10 sammen med 9.
+    Læg 10 sammen med 9.
+Farvel.
+────────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+comment
+────────────────────────────────────────────────────────────────
+Bemærk: Dette er en kommentar.
+Bemærk: Dette er også en kommentar.
+
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Bemærk print 1.
+    print 2.
+Farvel.
+────────────────────────────────────────────────────────────────
+2
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+if
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Hvis sand.
+    Goddag.
+        print 1.
+    Farvel.
+    Ellers.
+    Goddag.
+        print 2.
+    Farvel.
+
+    Hvis falsk.
+    Goddag.
+        print 3.
+    Farvel.
+    Ellers.
+    Goddag.
+        print 4.
+    Farvel.
+Farvel.
+────────────────────────────────────────────────────────────────
+1
+4
+────────────────────────────────────────────────────────────────
+
+
+
+
+════════════════════════════════════════════════════════════════
+expr list
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Ekko og inkrementer 1.
+    
+    Bemærk: Delsætning 1 er sin egen subexpr.
+    Bemærk: Delsætning 3 refererer til delsætning 2 med "det", 
+    Bemærk: og delsætning 2 bliver derfor et argument til delsætning 3.
+    Ekko og inkrementer 10, og ekko og inkrementer 20, og print det.
+Farvel.
+
+Offentlig Funktion Ekko og inkrementer (A som heltal) tilbagegiver heltal.
+Goddag.
+    Print A.
+    Tilbagegiv Læg A sammen med 1.
+Farvel.
+────────────────────────────────────────────────────────────────
+1
+10
+20
+21
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+expr list 2
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Hvis sand,  falsk. Goddag. print 1. Farvel.
+    Hvis falsk, sand.  Goddag. print 2. Farvel.
+    Hvis sand,  sand.  Goddag. print 3. Farvel.
+    Hvis falsk, falsk. Goddag. print 4. Farvel.
+Farvel.
+────────────────────────────────────────────────────────────────
+2
+3
+────────────────────────────────────────────────────────────────
+
+
+
+
+════════════════════════════════════════════════════════════════
+err missing dot
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Print 1
+Farvel.
+────────────────────────────────────────────────────────────────
+Unexpected token
+    Wanted: farvel
+    Given:  DK_TOKEN_KIND_EOF
+────────────────────────────────────────────────────────────────
+
+
+
+
+════════════════════════════════════════════════════════════════
+err invalid decl
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig ( heltal.
+Goddag.
+Farvel.
+────────────────────────────────────────────────────────────────
+Unexpected token
+    Wanted: som
+    Given:  DK_TOKEN_KIND_DOT
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+err type check
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    A 1,0 C. 
+    A 1 C.
+Farvel.
+
+Offentlig Funktion A (B som flyder) C tilbagegiver heltal.
+Goddag.
+Farvel.
+────────────────────────────────────────────────────────────────
+Unresolved function
+   Pattern: A <heltal> C
+────────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+err type check
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    A 1,0 C. 
+    A 1 C.
+Farvel.
+
+Offentlig Funktion A (B som flyder) C tilbagegiver heltal.
+Goddag.
+Farvel.
+────────────────────────────────────────────────────────────────
+Unresolved function
+   Pattern: A <heltal> C
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+local variable
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Gem 15 i A.
+    
+    Print A.
+Farvel.
+
+────────────────────────────────────────────────────────────────
+15
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+local variable assign expr
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Lad B være et heltal.
+    Gem 15 i A.
+    Gang 3 med 2, læg 10 sammen med det, og gem det i B.
+    Print A.
+    Print B.
+Farvel.
+
+────────────────────────────────────────────────────────────────
+15
+16
+────────────────────────────────────────────────────────────────
+
+════════════════════════════════════════════════════════════════
+err type check assign
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Gem 15,1 i A.
+    Print A.
+Farvel.
+
+────────────────────────────────────────────────────────────────
+Type mismtach
+    Wanted: heltal
+    Given:  flyder
+────────────────────────────────────────────────────────────────
+
+════════════════════════════════════════════════════════════════
+while loop
+────────────────────────────────────────────────────────────────
+Offentlig Funktion Hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    
+    Imedens A er mindre end 5.
+    Goddag.
+        Læg A sammen med 1, og gem det i A.
+        Print A.
+    Farvel.
+Farvel.
+
+────────────────────────────────────────────────────────────────
+1
+2
+3
+4
+5
+────────────────────────────────────────────────────────────────
+
+════════════════════════════════════════════════════════════════
+Fibonacci
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Lad B være et heltal.
+    Lad C være et heltal.
+    
+    Gem 1 i A.
+    Gem 1 i B.
+    Imens A er mindre end 1000.
+    Goddag.
+        Print A.
+        Gem A i C.
+        Læg A sammen med B, og gem det i A.
+        Gem C i B.
+    Farvel.
+Farvel.
+────────────────────────────────────────────────────────────────
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+233
+377
+610
+987
+────────────────────────────────────────────────────────────────
+
+════════════════════════════════════════════════════════════════
+cast int to/from float
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Lad A være et heltal.
+    Lad B være en flyder.
+    
+    Gem 10   i A.
+    Gem 10,3 i B.
+    
+    Støb A som flyder, og print det.
+    Støb B som heltal, og print det.
+    
+Farvel.
+────────────────────────────────────────────────────────────────
+10.000000
+10
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+comparison
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Print sand.
+    Print falsk.
+    
+    Print (1 er større end 2).
+    Print (2 er større end 1).
+    Print (2 er lig med 2).
+    Print (2 er lig med 1).
+Farvel.
+────────────────────────────────────────────────────────────────
+sand
+falsk
+falsk
+sand
+sand
+falsk
+────────────────────────────────────────────────────────────────
+
+
+════════════════════════════════════════════════════════════════
+boolean
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Print (enten falsk eller falsk).
+    Print (enten falsk eller sand).
+    Print (enten sand  eller falsk).
+    Print (enten sand  eller sand).
+    
+    Print (både falsk og falsk).
+    Print (både falsk og sand).
+    Print (både sand  og falsk).
+    Print (både sand  og sand).
+    
+    Print (ikke falsk).
+    Print (ikke sand).
+Farvel.
+────────────────────────────────────────────────────────────────
+falsk
+sand
+sand
+sand
+falsk
+falsk
+falsk
+sand
+sand
+falsk
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+spelled numbers
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    Print ethundredefireogtredive.
+    Print tretusindetohundrede.
+    Print toogfyrre.
+    Print tusind.
+    Print tohundredemillioner-tretusinde-syvoghalvtreds.
+    
+    Print (Læg toogfyrre sammen med tre).
+Farvel.
+────────────────────────────────────────────────────────────────
+134
+3200
+42
+1000
+200003057
+45
+────────────────────────────────────────────────────────────────
+
+
+
+════════════════════════════════════════════════════════════════
+intrinsics
+────────────────────────────────────────────────────────────────
+Offentlig funktion hovedsagelig tilbagegiver heltal.
+Goddag.
+    læg 4 sammen med 3, og print det.       Bemærk opcode: add
+    læg 4,0 sammen med 3,0, og print det.   Bemærk opcode: fadd
+    træk 4 fra 3, og print det.             Bemærk opcode: sub
+    træk 4,0 fra 3,0, og print det.         Bemærk opcode: fsub
+    gang 4 med 3, og print det.             Bemærk opcode: imul
+    gang 4,0 med 3,0, og print det.         Bemærk opcode: fmul
+    del 4 med 3, og print det.              Bemærk opcode: idiv
+    del 4,0 med 3,0, og print det.          Bemærk opcode: fdiv
+                                                   
+    4 er mindre end 3, og print det.        Bemærk opcode: lt
+    4,0 er mindre end 3,0, og print det.    Bemærk opcode: flt
+    4 er større end 3, og print det.        Bemærk opcode: gt
+    4,0 er større end 3,0, og print det.    Bemærk opcode: fgt
+    4 er lig med 3, og print det.           Bemærk opcode: eq
+    4,0 er lig med 3,0, og print det.       Bemærk opcode: feq
+                                                   
+    enten sand eller falsk, og print det.   Bemærk opcode: or
+    både sand og falsk, og print det.       Bemærk opcode: and
+    ikke sand, og print det.                Bemærk opcode: not
+    
+    støb 2 som flyder, og print det.        Bemærk opcode: i2f
+    støb 2,0 som heltal, og print det.      Bemærk opcode: f2i
+    
+Farvel.
+────────────────────────────────────────────────────────────────
+7
+7.000000
+1
+1.000000
+12
+12.000000
+1
+1.333333
+falsk
+falsk
+sand
+sand
+falsk
+falsk
+sand
+falsk
+falsk
+2.000000
+2
+────────────────────────────────────────────────────────────────
