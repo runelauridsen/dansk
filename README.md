@@ -19,12 +19,14 @@ Farvel.
 ```
 
 ## Build
-Clang:
+Windows:
 ```
-clang main.c -o dansk.exe
+> build.bat
+> build\dansk.exe test
 ```
 
-MSVC:
+Linux
 ```
-cl main.c /Fedansk.exe /std:c17
+$ ./build.sh
+$ build/dansk.exe test
 ```

@@ -8,7 +8,7 @@ static u64 map_hash(u64 h) {
 }
 
 static bool map_create(map *map, u64 cap) {
-    zero_struct(map);
+    mem_zero_struct(map);
     u64 *keys = heap_alloc(cap * sizeof(u64));
     u64 *vals = heap_alloc(cap * sizeof(u64));
 
@@ -31,7 +31,7 @@ static bool map_create(map *map, u64 cap) {
 static void map_destroy(map *map) {
     heap_free(map->keys);
     heap_free(map->vals);
-    zero_struct(map);
+    mem_zero_struct(map);
 }
 
 static void map_rehash(map *src, map *dst) {

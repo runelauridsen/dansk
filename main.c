@@ -73,18 +73,8 @@ static bool dk_cmdline_read_file(dk_cmdline *cmd, str *file_name, str *file_data
 }
 
 int main(int argc, char **argv) {
-#if 0
-    SetConsoleOutputCP(65001); // utf8
-    arena a = { 0 };
-    dk_run_test_file_filtered(str("W:\\dansk\\tests\\tests.dk"), str("comparison"), &a);
-    return 0;
-#endif
-
-    SetConsoleOutputCP(65001); // utf8
-
-#if 0
-    arena arena = { 0 };
-    scratch(arena);
+#if _WIN32
+    SetConsoleOutputCP(65001); // NOTE(rune): UTF8 codepage
 #endif
 
     static char *usage =
@@ -95,6 +85,8 @@ int main(int argc, char **argv) {
 
     arena *arena = arena_create_default();
     temp_arena = arena_create_default();
+
+    i32 a = mem_cmp_nocase("abc", "abc", 3);
 
     if (argc == 1) {
         println("%", usage);

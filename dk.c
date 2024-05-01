@@ -213,7 +213,7 @@ static str dk_str_from_token_kind(dk_token_kind a) {
 }
 
 static bool dk_next_token(dk_tokenizer *t, dk_token *token) {
-    zero_struct(token);
+    mem_zero_struct(token);
 
     // rune: Eat whitespace
     while (u8_get_char_flags(t->peek0) & CHAR_FLAG_WHITESPACE) {

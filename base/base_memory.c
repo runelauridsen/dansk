@@ -1,12 +1,37 @@
 ////////////////////////////////////////////////////////////////
+// rune: Comparison
+
+static i32 mem_cmp(void *a, void *b, i64 size) {
+    i32 ret = memcmp(a, b, size);
+    return ret;
+}
+
+static i32 mem_cmp_nocase(void *a, void *b, i64 size) {
+    i32 ret = 0;
+
+    char *ca = a;
+    char *cb = b;
+
+    while (size--) {
+        if (u8_to_upper(*ca) != u8_to_upper(*cb)) {
+            ret = *ca - *cb;
+            break;
+        }
+
+        ca++;
+        cb++;
+    }
+
+    return ret;
+}
+
+////////////////////////////////////////////////////////////////
 // rune: Heap
+
+#if _WIN32
 
 static void *heap_alloc(i64 size) {
     void *ret = HeapAlloc(GetProcessHeap(), 0, u64(size));
-    assert(ret);
-#ifdef TRACK_ALLOCATIONS
-    idk_track_alloc(IDK_LOCATION, ret, size);
-#endif
     return ret;
 }
 
@@ -18,21 +43,40 @@ static void *heap_realloc(void *p, i64 size) {
         ret = HeapReAlloc(GetProcessHeap(), 0, p, u64(size));
     }
 
-    assert(ret);
-#ifdef TRACK_ALLOCATIONS
-    idk_track_realloc(IDK_LOCATION, p, ret, size);
-#endif
     return ret;
 }
 
 static void heap_free(void *p) {
     if (p) {
         HeapFree(GetProcessHeap(), 0, p);
-#ifdef TRACK_ALLOCATIONS
-        idk_track_free(IDK_LOCATION, p);
-#endif
     }
 }
+
+#else
+
+static void *heap_alloc(i64 size) {
+    void *ret = malloc(size);
+    return ret;
+}
+
+static void *heap_realloc(void *p, i64 size) {
+    void *ret = null;
+    if (p == null) {
+        ret = heap_alloc(size);
+    } else {
+        ret = realloc(p, size);
+    }
+
+    return ret;
+}
+
+static void heap_free(void *p) {
+    if (p) {
+        free(p);
+    }
+}
+
+#endif
 
 ////////////////////////////////////////////////////////////////
 // rune: Arena
@@ -199,7 +243,7 @@ static bool darray_create_(array *array, i64 elem_size, i64 initial_cap) {
 static void darray_destroy_(array *array) {
     if (array) {
         heap_free(array->v);
-        zero_struct(array);
+        mem_zero_struct(array);
     }
 }
 

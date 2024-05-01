@@ -62,8 +62,12 @@ typedef double      f64;
 #define memberof(T,m)       (((T *)0)->m)
 #define isizeof(a)          ((i64)sizeof(a))
 
-#pragma section(".rdata")
-#define readonly __declspec(allocate(".rdata"))
+#if _WIN32
+#   pragma section(".rdata")
+#   define readonly __declspec(allocate(".rdata"))
+#else
+#   define readonly // TODO(rune): How to place data in a read only segment on linux?
+#endif
 
 #define unused(...)     (void)(__VA_ARGS__)
 
@@ -243,10 +247,18 @@ typedef enum move_by {
 } move_by;
 
 ////////////////////////////////////////////////////////////////
-// rune: Assertions
+// rune: Breakpoints
 
-#define debug_break()   (__debugbreak())
-#define nop()           (__nop())
+#if _WIN32
+#   define debug_break()   (__debugbreak())
+#   define nop()           (__nop())
+#else
+static inline void debug_break(void) { __asm__("int3"); }
+static inline void nop(void) { __asm__("nop"); }
+#endif
+
+////////////////////////////////////////////////////////////////
+// rune: Assertions
 
 #undef assert
 #if NDEBUG
@@ -896,6 +908,7 @@ static inline rect rect_make_dim(vec2 p0, vec2 dim) { return lit(rect) { p0, vec
 
 static inline bool rect_eq(rect a, rect b) { return vec2_eq(a.p0, b.p0) && vec2_eq(a.p1, b.p1); }
 static inline vec2 rect_dim(rect r) { return vec2_sub(r.p1, r.p0); }
+static inline vec2 rect_half_dim(rect r) { return vec2_mul(vec2_sub(r.p1, r.p0), vec2(0.5, 0.5)); }
 static inline f32 rect_dim_x(rect r) { return r.x1 - r.x0; }
 static inline f32 rect_dim_y(rect r) { return r.y1 - r.y0; }
 static inline f32 rect_dim_a(rect r, axis2 axis) { return axis == AXIS2_X ? rect_dim_x(r) : rect_dim_y(r); }

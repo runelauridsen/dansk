@@ -1,2 +1,2 @@
 @echo off
-call build.bat && dansk.exe test
+build.bat && build\dansk.exe test

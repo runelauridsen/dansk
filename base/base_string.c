@@ -464,7 +464,7 @@ static char_flags u32_get_char_flags(u32 c) {
 }
 
 static char_flags u8_get_char_flags(u8 c) {
-    static_assert(countof(char_flags_table) == 256, "char_flags_table size should be 256");
+    _Static_assert(countof(char_flags_table) == 256, "char_flags_table size should be 256");
     return char_flags_table[c];
 }
 
@@ -553,7 +553,7 @@ static bool str_eq_nocase(str a, str b) {
 
     if (a.count == b.count) {
         if (a.count) {
-            ret = _memicmp(a.v, b.v, a.count) == 0;
+            ret = mem_cmp_nocase(a.v, b.v, a.count) == 0;
         } else {
             ret = true;
         }
@@ -610,7 +610,7 @@ static i64 str_idx_of_str_nocase(str a, str b) {
 
         for (i64 i = 0; i <= a.count - b.count; i++) {
             if (u8_eq_nocase(a.v[i], first) && u8_eq_nocase(a.v[i + b.count - 1], last)) {
-                if (_memicmp(a.v + i, b.v, b.count) == 0) {
+                if (mem_cmp_nocase(a.v + i, b.v, b.count) == 0) {
                     ret = i;
                     break;
                 }
@@ -901,14 +901,14 @@ static str_array str_array_from_list(str_list list, arena *arena) {
 // rune: Comparison
 
 static i32 str_cmp_case(str a, str b) {
-    i32 ret = strncmp((char *)a.v, (char *)b.v, min(a.len, b.len));
+    i32 ret = mem_cmp(a.v, b.v, min(a.len, b.len));
     if (ret == 0 && a.len < b.len) ret = -1;
     if (ret == 0 && a.len > b.len) ret =  1;
     return ret;
 }
 
 static i32 str_cmp_nocase(str a, str b) {
-    i32 ret = _strnicmp((char *)a.v, (char *)b.v, min(a.len, b.len));
+    i32 ret = mem_cmp_nocase(a.v, b.v, min(a.len, b.len));
     if (ret == 0 && a.len < b.len) ret = -1;
     if (ret == 0 && a.len > b.len) ret =  1;
     return ret;

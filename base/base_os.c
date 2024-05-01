@@ -402,4 +402,101 @@ static f64 os_get_millis_between(u64 t_begin, u64 t_end) {
     return ret;
 }
 
+#else
+
+////////////////////////////////////////////////////////////////
+// rune: Intialization
+
+static void os_init(void) {
+}
+
+static void os_deinit(void) {
+}
+
+////////////////////////////////////////////////////////////////
+// rune: Threads
+
+static os_handle os_thread_create(os_thread_proc *proc, void *param) { return (os_handle) { 0 }; } // TODO(rune): Implement with pthreads
+static void os_thread_destroy(os_handle thread) {} // TODO(rune): Implement with pthreads
+static void os_thread_join(os_handle thread) {} // TODO(rune): Implement with pthreads
+static void os_thread_sleep(i32 millis) {} // TODO(rune): Implement with pthreads
+
+////////////////////////////////////////////////////////////////
+// rune: Mutexes
+
+static os_handle os_mutex_create(void) { return (os_handle) { 0 }; } // TODO(rune): Implement with pthreads
+static void os_mutex_destroy(os_handle mutex) {} // TODO(rune): Implement with pthreads
+static void os_mutex_acquire(os_handle mutex) {} // TODO(rune): Implement with pthreads
+static void os_mutex_release(os_handle mutex) {} // TODO(rune): Implement with pthreads
+
+////////////////////////////////////////////////////////////////
+// rune: Condition variables
+
+static os_handle os_cond_create(void) { return (os_handle) { 0 }; } // TODO(rune): Implement with pthreads
+static void os_cond_destroy(os_handle cond) {} // TODO(rune): Implement with pthreads
+static void os_cond_wait(os_handle cond, os_handle mutex, u32 timeout_ms) {} // TODO(rune): Implement with pthreads
+static void os_cond_signal(os_handle cond) {} // TODO(rune): Implement with pthreads
+static void os_cond_signal_all(os_handle cond) {} // TODO(rune): Implement with pthreads
+
+////////////////////////////////////////////////////////////////
+// rune: Entire file
+
+static str os_read_entire_file(str file_name, arena *arena, bool *succeeded) {
+    bool ok = false;
+
+    FILE *f = fopen(file_name.v, "rb");
+    if (!f) goto exit;
+
+    if (fseek(f, 0, SEEK_END)) goto exit;
+    size_t fsize = ftell(f);
+    if (fseek(f, 0, SEEK_SET)) goto exit;
+
+    char *buffer = arena_push_size(arena, fsize, 1);
+    if (!buffer) goto exit;
+
+    if (fread(buffer, fsize, 1, f) != 1) goto exit;
+
+    buffer[fsize] = 0;
+
+    ok = true;
+
+exit:
+    if (f) fclose(f);
+
+    str ret = str("");
+    if (ok) {
+        ret = str_make(buffer, fsize);
+    }
+
+    if (succeeded) *succeeded = ok;
+
+    return ret;
+}
+
+static void os_write_entire_file(str file_name, str data, arena *arena, bool *succeeded) {
+    // TODO(rune): Implement with CRT
+}
+
+////////////////////////////////////////////////////////////////
+// rune: File info
+
+static os_file_info_list os_get_files_from_path(str path, i64 max, arena *arena) {
+    // TODO(rune): Implement for linux
+}
+
+////////////////////////////////////////////////////////////////
+// rune: Performance counter
+
+static u64 os_get_performance_timestamp(void) {
+    struct timespec t = { 0 };
+    clock_gettime(CLOCK_REALTIME, &t);
+    return t.tv_nsec;
+}
+
+static f64 os_get_millis_between(u64 t_begin, u64 t_end) {
+    u64 ns = t_end - t_begin;
+    f64 ms = f64(ns) / 1000000.0;
+    return ms;
+}
+
 #endif

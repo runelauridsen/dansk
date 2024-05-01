@@ -1,13 +1,21 @@
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+
+#if _WIN32
+#   define WIN32_LEAN_AND_MEAN
+#   include <windows.h>
+#   include <intrin.h>
+#else
+#   include <time.h> // NOTE(rune): For clock_getttime
+#endif
 
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdalign.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
-#include <intrin.h>
+#include <inttypes.h> // NOTE(rune): Macros for printf'ing int64_t etc...
 
 #ifdef __cplusplus
 #include "base_core.h"

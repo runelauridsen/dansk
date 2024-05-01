@@ -34,7 +34,7 @@ static readonly u8 utf8_table[256] = {
 };
 
 static i32 utf8_class_from_u8(u8 cu) {
-    static_assert(countof(utf8_table) == 256, "Size of utf8_table should be 256");
+    _Static_assert(countof(utf8_table) == 256, "Size of utf8_table should be 256");
     i32 ret = (i32)utf8_table[cu];
     return ret;
 }

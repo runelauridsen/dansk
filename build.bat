@@ -1,2 +1,6 @@
 @echo off
-cl main.c /std:c17 /Fedansk.exe /nologo
+if not exist build mkdir build
+
+pushd build
+cl ..\main.c /std:c17 /Fedansk.exe /nologo
+popd

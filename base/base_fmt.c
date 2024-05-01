@@ -88,25 +88,26 @@ static void fmt_append_character(buf *buf, fmt_spec spec, u32 c) {
 
 static void fmt_append_hex(buf *buf, fmt_spec spec, u64 v) {
     if (spec.lit) {
-        fmt_append_printf(buf, spec, "0x%llx", v);
+        //fmt_append_printf(buf, spec, "0x%llx", v);
+        fmt_append_printf(buf, spec, "0x%" PRIx64, v);
     } else {
-        fmt_append_printf(buf, spec, "%llx", v);
+        fmt_append_printf(buf, spec, "%" PRIx64, v);
     }
 }
 
 static void fmt_append_hexpad(buf *buf, fmt_spec spec, u64 v, i32 num_bits) {
     if (spec.lit) {
-        fmt_append_printf(buf, spec, "0x%0*llx", num_bits / 4, v);
+        fmt_append_printf(buf, spec, "0x%0*" PRIx64, num_bits / 4, v);
     } else {
-        fmt_append_printf(buf, spec, "%0*llx", num_bits / 4, v);
+        fmt_append_printf(buf, spec, "%0*" PRIx64, num_bits / 4, v);
     }
 }
 
 static void fmt_append_usigned(buf *buf, fmt_spec spec, u64 v, i32 num_bits) {
     if (spec.size) {
-        if (v < 1024)               fmt_append_printf(buf, spec, "%llu B", v);
-        else if (v < 1024 * 1024)   fmt_append_printf(buf, spec, "%llu KB", v / 1024);
-        else                        fmt_append_printf(buf, spec, "%llu MB", v / (1024 * 1024));
+        if (v < 1024)               fmt_append_printf(buf, spec, "%" PRIu64 " B", v);
+        else if (v < 1024 * 1024)   fmt_append_printf(buf, spec, "%" PRIu64 " KB", v / 1024);
+        else                        fmt_append_printf(buf, spec, "%" PRIu64 " MB", v / (1024 * 1024));
     } else if (spec.character) {
         fmt_append_character(buf, spec, u32(v));
     } else if (spec.hex) {
@@ -114,15 +115,15 @@ static void fmt_append_usigned(buf *buf, fmt_spec spec, u64 v, i32 num_bits) {
     } else if (spec.hexpad) {
         fmt_append_hexpad(buf, spec, v, num_bits);
     } else {
-        fmt_append_printf(buf, spec, "%llu", v);
+        fmt_append_printf(buf, spec, "%" PRIu64, v);
     }
 }
 
 static void fmt_append_signed(buf *buf, fmt_spec spec, i64 v, i32 num_bits) {
     if (spec.size) {
-        if (v < 1024)               fmt_append_printf(buf, spec, "%lli B", v);
-        else if (v < 1024 * 1024)   fmt_append_printf(buf, spec, "%lli KB", v / 1024);
-        else                        fmt_append_printf(buf, spec, "%lli MB", v / (1024 * 1024));
+        if (v < 1024)               fmt_append_printf(buf, spec, "%" PRIi64 " B", v);
+        else if (v < 1024 * 1024)   fmt_append_printf(buf, spec, "%" PRIi64 " KB", v / 1024);
+        else                        fmt_append_printf(buf, spec, "%" PRIi64 " MB", v / (1024 * 1024));
     } else if (spec.character) {
         fmt_append_character(buf, spec, u32(v));
     } else if (spec.hex) {
@@ -130,7 +131,7 @@ static void fmt_append_signed(buf *buf, fmt_spec spec, i64 v, i32 num_bits) {
     } else if (spec.hexpad) {
         fmt_append_hexpad(buf, spec, u64(v), num_bits);
     } else {
-        fmt_append_printf(buf, spec, "%lli", v);
+        fmt_append_printf(buf, spec, "%" PRIi64, v);
     }
 }
 

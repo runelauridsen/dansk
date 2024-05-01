@@ -1,13 +1,22 @@
 ////////////////////////////////////////////////////////////////
-// rune: Macros
+// rune: Sizes
 
 #define kilobytes(x)             ((x) * 1024LL)
 #define megabytes(x)             (kilobytes(x) * 1024LL)
 #define gigabytes(x)             (megabytes(x) * 1024LL)
 
-#define zero_size(a, size)       (memset((a), 0, (size)))
-#define zero_struct(a)           (memset((a), 0, sizeof(*(a))))
-#define zero_array(a,c)          (memset((a), 0, sizeof(*(a)) * c))
+////////////////////////////////////////////////////////////////
+// rune: Zeroing
+
+#define mem_zero_size(a, size)  (memset((a), 0, (size)))
+#define mem_zero_struct(a)      (memset((a), 0, sizeof(*(a))))
+#define mem_zero_array(a,c)     (memset((a), 0, sizeof(*(a)) * c))
+
+////////////////////////////////////////////////////////////////
+// rune: Comparison
+
+static i32 mem_cmp(void *a, void *b, i64 size);
+static i32 mem_cmp_nocase(void *a, void *b, i64 size);
 
 ////////////////////////////////////////////////////////////////
 // rune: Heap
