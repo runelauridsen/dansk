@@ -25,7 +25,7 @@ Windows:
 > build\dansk.exe test
 ```
 
-Linux
+Linux:
 ```
 $ ./build.sh
 $ build/dansk.exe test

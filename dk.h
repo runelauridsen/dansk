@@ -11,7 +11,7 @@
 
 static arena *temp_arena = { 0 };
 
-// TODO(rune): Think about a smarter way yo report source code locations.
+// TODO(rune): Think about a smarter way to report source code locations.
 // currently most of the ast's memory usage is dk_loc structs.
 typedef struct dk_loc dk_loc;
 struct dk_loc {

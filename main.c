@@ -1,10 +1,5 @@
 ////////////////////////////////////////////////////////////////
-//
-//
-// Include source files
-//
-//
-////////////////////////////////////////////////////////////////
+// rune: Source files
 
 #include "base/base.h"
 #include "dk.h"
@@ -13,12 +8,7 @@
 #include "dk_tests.c"
 
 ////////////////////////////////////////////////////////////////
-//
-//
-// Command line program
-//
-//
-////////////////////////////////////////////////////////////////
+// rune: Command line program
 
 typedef struct dk_cmdline dk_cmdline;
 struct dk_cmdline {
@@ -85,8 +75,6 @@ int main(int argc, char **argv) {
 
     arena *arena = arena_create_default();
     temp_arena = arena_create_default();
-
-    i32 a = mem_cmp_nocase("abc", "abc", 3);
 
     if (argc == 1) {
         println("%", usage);
